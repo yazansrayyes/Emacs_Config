@@ -1018,3 +1018,4 @@ Sets up undo-redo functionality in evil using undo-tree ("u" for undo & "C-r" fo
 (setq evil-undo-system 'undo-tree)
 #+end_src
 
+Testing branching in git.
