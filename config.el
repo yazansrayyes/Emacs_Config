@@ -125,7 +125,8 @@
 
   (AY/leader-keys
     "g" '(:ignore t :wk "Magit")
-    "g c" '(magit-commit-create :wk "Magit commit")
+    "g c" '(magit-commit :wk "Magit commit")
+    "g s" '(magit-stage-buffer-file :wk "Magit stage file")
     "g g" '(magit-status :wk "Magit status"))
 
 

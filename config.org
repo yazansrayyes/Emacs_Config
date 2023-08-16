@@ -187,7 +187,8 @@
 
   (AY/leader-keys
     "g" '(:ignore t :wk "Magit")
-    "g c" '(magit-commit-create :wk "Magit commit")
+    "g c" '(magit-commit :wk "Magit commit")
+    "g s" '(magit-stage-buffer-file :wk "Magit stage file")
     "g g" '(magit-status :wk "Magit status"))
 
 
@@ -1018,3 +1019,4 @@ Sets up undo-redo functionality in evil using undo-tree ("u" for undo & "C-r" fo
 #+end_src
 
 Lets see if magit works
+ddd
