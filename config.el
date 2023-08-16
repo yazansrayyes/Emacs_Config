@@ -466,11 +466,6 @@ one, an error is signaled."
   :config
   (evil-collection-init 'magit))
 
-(defun view-log-graph ()
-  (interactive)
-  (let ((magit-log-arguments '("--graph" "--oneline")))
-    (magit-log)))
-
 (use-package neotree			
   :config
   (setq neo-smart-open nil
