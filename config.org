@@ -622,7 +622,6 @@ Setting up magit (git package in emacs). Seems to be working fine with evil mode
   :after magit
   :config
   (evil-collection-init 'magit))
-
 #+end_src
 
 * NEOTREE 
