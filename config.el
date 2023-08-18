@@ -70,11 +70,13 @@
     (evil-mode))
   (use-package evil-collection
     :after evil
+    :after magit
     :config
-    (setq evil-collection-mode-list '(dashboard dired ibuffer))
+    (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
     (evil-collection-init))
-  (use-package evil-tutor)
-(setq ring-bell-function #'ignore)
+ 
+ (use-package evil-tutor)
+ (setq ring-bell-function #'ignore)
 
 (use-package general
   :config
@@ -319,6 +321,7 @@ one, an error is signaled."
     "Language fails"
     "This separates the intrepid from the casual, believe me"
     "انطيني بايب القدس"
+    "خلني أشرحلك"
   ))
   :config
   (dashboard-setup-startup-hook))
@@ -389,13 +392,13 @@ one, an error is signaled."
 
 ;;Setting up a few keybindings to use in ein (NOTE: these keybindings only work when in ein mode)
 (with-eval-after-load 'evil
-  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-m") 'ein:worksheet-change-cell-to-markdown)
-  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-c") 'ein:worksheet-change-cell-to-code)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-t") 'ein:worksheet-change-cell-type) ;toggles type of block (code<->mkdn)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-b") 'ein:worksheet-insert-cell-below)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-a") 'ein:worksheet-insert-cell-above)
   (evil-define-key '(normal)  ein:notebook-mode-map (kbd "dd") 'ein:worksheet-kill-cell)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-s") 'ein:notebook-save-notebook-command-km)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-r") 'ein:worksheet-execute-cell)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-a") 'ein:worksheet-execute-all-cells)
 )
 
 ;;Toggling line numbers to be always on while using notebook (.ipynb file)——for some reason they keep turning off
@@ -403,6 +406,7 @@ one, an error is signaled."
   "My setup for ein:notebook-mode."
   (display-line-numbers-mode 1))
 (add-hook 'ein:notebook-mode-hook 'my-ein-setup)
+(setq ein:worksheet-enable-undo t)
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -460,11 +464,6 @@ one, an error is signaled."
   :ensure t)
 
 ;;need to use evil-collection for evil mode to work properly with magit status buffer
-(use-package evil-collection
-  :ensure t
-  :after magit
-  :config
-  (evil-collection-init 'magit))
 
 (use-package neotree			
   :config
