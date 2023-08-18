@@ -1,2 +1,2 @@
 # Alrayyes Emacs Configuration Files
-Emacs config files
+Emacs config & shortcuts files
