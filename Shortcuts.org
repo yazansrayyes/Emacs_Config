@@ -1,0 +1,258 @@
+#+TITLE: Helpful Emacs Shortcuts
+#+AUTHOR: Yazan Alrayyes
+#+SUBTITLE: Shortcuts to know for using Emacs 
+#+Startup: showeverything
+#+OPTIONS: H:5 toc:2 num:t
+#+EXPORT_FILE_NAME: Emacs Shortcuts
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+@@latex:\clearpage@@ 
+
+* Table of Contents :toc:
+- [[#code-blocks][Code Blocks]]
+  - [[#editing-code-block-in-seperate-buffer][Editing Code Block in Seperate Buffer]]
+  - [[#evaluating-code-blocksoutputting-results][Evaluating Code Blocks/Outputting Results]]
+  - [[#selectingdeleting-entire-block][Selecting/Deleting Entire Block]]
+- [[#cursor-position][Cursor Position]]
+  - [[#back-to-previousnext-cursor-postion][Back to Previous/Next Cursor Postion]]
+  - [[#savecycle-through-cursor-positions][Save/Cycle Through Cursor Positions]]
+  - [[#pasting-while-in-insert-mode][Pasting while in Insert Mode]]
+- [[#dired-opening-directory][Dired (Opening Directory)]]
+- [[#emacs-commands][Emacs Commands]]
+  - [[#repeating-last-command][Repeating last command]]
+- [[#enter-insert-mode-at-the-endstart-of-the-line][Enter Insert Mode at the End/Start of the /Line/]]
+- [[#exporting-documents][Exporting Documents]]
+  - [[#export-org-mode-to-pdf-latex][Export Org Mode to PDF (Latex)]]
+  - [[#exporting-org-mode-to-html][Exporting Org Mode to HTML]]
+- [[#go-to-link][Go To Link]]
+- [[#jupyter-notebook][Jupyter Notebook]]
+  - [[#steps-for-jupyter-server][Steps for Jupyter Server]]
+  - [[#notebook-shortcuts][Notebook Shortcuts]]
+- [[#latex][Latex]]
+  - [[#inserting-latex][Inserting Latex]]
+  - [[#preview-latex][Preview Latex]]
+  - [[#latex-example][Latex Example]]
+- [[#move-through-same-level-headings][Move Through Same Level Headings]]
+- [[#neotree][Neotree]]
+- [[#org-agenda][Org Agenda]]
+  - [[#to-do][TO-DO]]
+- [[#shell][Shell]]
+  - [[#clearing-shell-buffer][Clearing Shell Buffer]]
+- [[#view-recently-used-commandskeys][View Recently Used Commands/Keys]]
+- [[#miscellaneous-notes][Miscellaneous Notes]]
+
+* Code Blocks
+** Editing Code Block in Seperate Buffer
+(M-p) org-edit-special: opens code block source code in seperate buffer/window. It's just a keybinding I made for (C-c ').
+After finishing, press (M-;)/(C-c ') in window to export code back to block.
+
+(M-;) org-edit-src-exit: kill current sub-editing buffer and return to code block with changes. Same as (C-c ') when in block editor window.
+
+If you have a codeblock in org mode and use this, a new window containing your code will open (same frame) with the corresponding major mode i.e. allow you to use autcomplete such as Company package. Then, you can edit your code in this new window & after you're done, the code will be copied to the code block.
+
+This makes it a lot easier to insert/code within org mode, without missing out on all the language plugins that exist for each language's major mode.
+
+** Evaluating Code Blocks/Outputting Results
+You can add keyword ":results value/output" after codeblock #+begin_src LANGUAGE tage in order for it to evaluate and output the code in your org document.
+You can use either "value" or "output". See [[https://orgmode.org/manual/Results-of-Evaluation.html]]
+
+(M-r) can be used inside code block to evaluate code (get result). It's just a keybinding I made for (C-c C-c).
+
+NOTE: Ensure you download the language from Org Babel (check config file) if it's not evaluating.
+
++NOTE 2: Python needs you to add  ":python python3" in order to work. This specifies the name of the command for executing Python code, which on your computer is python3.+
+^Dismiss this. I fixed it in the config file by setting python3 to be default execution command. Use python like any other code block.
+
+Example 1:
+
+#+begin_src emacs-lisp :results value
+(message "hi emacs")
+(message "hi again")
+;tesing comments/keybinding
+#+end_src
+
+#+RESULTS:
+: hi again
+
+Example 2:
+# use return statement
+# Entire source block will get indented and used as the body of main()
+#+begin_src python
+def foo(x):
+  if x>0:
+    return x+1
+
+  else:
+    return 17
+
+return foo(0)
+#+end_src
+
+#+RESULTS:
+: 17
+
+Example 3:
+
+#+begin_src C++ :includes <stdio.h>
+int a=1;
+int b=1;
+printf("%d\n", a+b);
+#+end_src
+
+#+RESULTS:
+: 2
+
+** Selecting/Deleting Entire Block
+(M-h) while in block selects the entire block of code (including block tags). This would allow you to quickly delete/yank a block.
+* Cursor Position
+
+** Back to Previous/Next Cursor Postion
+C-o (previous position)
+C-i (next position)
+
+For example, if you press "gg" to go to the beginning of the document. You can press C-o to go back to the position you were at before. If you do that, then use C-i, it will take you to back to the beginning of the document.
+
+** Save/Cycle Through Cursor Positions
+m+[letter mark] saves the current position of your cursor to the letter you use.
+`+[letter] to jump to the location of the cursor that was saved to the letter.
+
+** Pasting while in Insert Mode
+C-r + [#register] The copied text should be in saved to one of the registers. If you enter a number after C-r, it will paste the contents of that register (if any).
+
+* Dired (Opening Directory)
+(SPC-d d) opens dired (it asks you to specify directory).
+(SPC-d j) opens dired in the directory of current buffer.
+(SPC-d p) toggles dired preview on & off (allows you to preview files like images while you're scrolling in dired——preview is shown a new buffer to the side).
+*NOTE*: dired preview is especially buggy. If it's not changing as you scroll, use "escape" a few times then try again. It messes up what mode you're in sometimes.
+
+NOTE: I configured evil mode to work with dired: (k/j goes up/down in directory, but h/l goes up/down between directories)
+i.e. if you're in a desktop file & press h, dired will now show desktop directory.
+
+* Emacs Commands
+** Repeating last command
+(C-x z) repeats the last command used.
+
+* Enter Insert Mode at the End/Start of the /Line/
+SHIFT-i takes you to the beginning of the line in insert mode.
+SHIFT-a takes you to the end of the line in insert mode.
+
+* Exporting Documents
+NOTE: You NEED to remove Table of Contents in Org file when exporting since HTML/Latex create their own table of contents and add it. Keeping the TOC in the org file when exporting will cause an error/duplicate table of contents in output file.
+
+Also, note that adding (#+OPTIONS: num:nil) to remove numbering headlines in the output document causes latex pdf not to have a Table of Contents (this is a bug——be mindful of it). It works fine for HTML though.
+
+** Export Org Mode to PDF (Latex)
+C-c C-e  (org-export-dispatch) shows you options for exporting org document into other formats. i.e using "l p" after this command exports the document into pdf along with any indcluded latex rendered completely. See [[Latex]].
+
+OR
+
+(SPC-> e) is a keybinding I created for (org-export-dispatch)
+
+*** Starting next tree from a next page
+@ @latex:\clearpage@ @  (without the spaces between @'s) makes it so that whatever succeeds it starts on a new document (i.e. starting content on a different page from Table of Contents).
+
+** Exporting Org Mode to HTML
+You can export an Org mode document to HTML using org-export-dispatch (SPC-> e). This opens export options from which you can choose to export to HTML
+
+You also need to include the following in the heading of your document for it to work:
+
+#+begin_export html
+# #+OPTIONS: toc:2 num:nil H:5  broken-links:mark <br>
+# #+EXPORT_FILE_NAME: Emacs_Shortcuts.html <br>
+# #+Setupfile: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup <br>
+#+end_export
+
+The broken-links part makes sure the export works even with "broken links". NOTE: Using a table of contents will result in broken links in the exported html since the theme creates its own table of contents. If you want to use this option to export to HTML, you must remove the table of contents from the org document.
+
+EXPORT_FILE_NAME defines the output's file name.
+
+Setupfile defines an HTML theme to use for the export. Many themes can be found online (for org->HTML export). This basically helps with formatting the HTML output (think CSS).
+* Go To Link
+C-c C-o (press when cursor is on internal link to follow it)
+
+If you're on a table of contents link and you click this, you will go the contents (click the clink).
+ 
+[[https://www.youtube.com]]
+
+* Jupyter Notebook
+Use ein to edit .ipynb files (jupyter notebook). I have set up a few keybindings for it as well (check config file).
+
+To use it:
+1. Open the .ipynb file
+2. Use command (ein:jupyter-server-start) to start jupyter server
+3. Use command (ein:notebooklist-open) to open list with current Notebooks (you can also create new notebooks here).
+
+You need to have a Jupyter server running before using ein:notebooklist-open in ein (Emacs IPython Notebook). The ein:notebooklist-open function is used to open the list of available Jupyter notebooks from the server.
+
+** Steps for Jupyter Server
+Start Jupyter Server: Before you can interact with Jupyter notebooks using ein, you need to start a Jupyter server. You can do this by opening a terminal or command prompt and running the command "jupyter notebook".
+
+Open ein Notebook List: After the Jupyter server is up and running, you can open the ein notebook list by executing the command M-x ein:notebooklist-open. This command will display a list of notebooks available on the Jupyter server.
+
+Select a Notebook: From the list of notebooks, you can select the notebook you want to work on by navigating to it and pressing RET (Enter).
+
+Interact with the Notebook: Once you've opened a notebook, you can interact with its cells, execute code, create new cells, etc., using the ein interface.
+
+Keep in mind that ein relies on the Jupyter server for its functionality. The server hosts the notebooks and provides the backend for running code cells and managing the notebook files. Therefore, you should ensure that the Jupyter server is running and accessible before using ein commands.
+
+If you encounter any issues with ein not working as expected, make sure that your Jupyter server is running and that you have followed the setup instructions for ein in your Emacs configuration.
+
+** Notebook Shortcuts
+(M-b) adds cell below current. (M-a) adds cell aboves. [same type of the current cell]
+(M-t) toggles cell type [code<->mkdn]
+(M-r) run cell
+(M-s) save notebook
+
+* Latex 
+** Inserting Latex
+You can insert latex expressions without the need for special marking.("The inline mode uses one of the delimiters: \ ( \), $ $ or \begin{math} \end{math}")
+
+Simply:
+
+*** Environments of any kind: The only requirement is that the ( \ begin) statement appears on a new line, preceded by only whitespace.
+
+So, if you're typing regularly in org mode write your latex experssion between '$' or '\' and it should automatically be converted. Using \(EXPRESSION\ ) is generally the safest option [NOTE: remove white space between the \ & (). 
+
+** Preview Latex
+NOTE: I enabled fragtog mode in the config file, which previews latex immediately after you're done editing it. To edit it, simply put your cursor back on it. It works similar to the way you bold/italicize words in org mode.
+
+*** OLD METHOD:
+C-c C-x C-l (org-latex-preview) Produce a preview image of the LaTeX fragment at point and overlay it over the source code.
+You can also turn on the previewing of all LaTeX fragments in a file with:
+#+begin_quote
+#+Startup: showeverything latexpreview
+#+end_quote
+
+** Latex Example
+
+\begin{equation}                     
+x=\sqrt{b}                              
+\end{equation}                        
+
+If $a^2=b$ and \( b=2 \), then the solution must be
+either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \]
+
+* Move Through Same Level Headings
+C-c C-n (next heading)
+C-c C-p (previous heading)
+
+If you're at the first heading & want to move down to the next heading of the same level (instead of the heading's text), then you can move around the same level text using these keys.
+
+* Neotree
+(SPC-t n) opens neotree in the path of the current buffer.
+(SPC-t t) toggles neotree on & off.
+(SPC-t d) opens neotree in directory that you specify.
+NOTE: I also configured Neotree so that it works fine while in evil mode.
+
+* Org Agenda
+** TO-DO
+(SPC-m t) to cycle through TO-DO labels. This keybinding is the same as (C-c C-t).
+
+* Shell 
+** Clearing Shell Buffer  
+C-c M-o clears the shell buffer (regular shell)
+
+* View Recently Used Commands/Keys
+If you want to check the last command/keybinding that you used (for example, to see what caused a certain behavior), go to the messages buffer (shows command history).
+
+* Miscellaneous Notes
+*** I remapped CAPSLOCK to be escape on my mac keyboard (esc is still also esc). Having escape on the home row makes it more accessible (for vim/evil mode).
