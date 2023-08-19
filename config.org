@@ -28,7 +28,6 @@
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#magit][MAGIT]]
 - [[#neotree][NEOTREE]]
-- [[#quick-navigation-scan-through-document][QUICK NAVIGATION (SCAN THROUGH DOCUMENT)]]
 - [[#org-mode][ORG MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
@@ -39,6 +38,7 @@
   - [[#code-blocks][Code Blocks]]
   - [[#latex][Latex]]
 - [[#projectile][PROJECTILE]]
+- [[#quick-navigation-scan-through-document][QUICK NAVIGATION (SCAN THROUGH DOCUMENT)]]
 - [[#rainbow-mode][RAINBOW MODE]]
 - [[#reload-emacs][RELOAD EMACS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
@@ -46,6 +46,7 @@
 - [[#sudo-edit][SUDO EDIT]]
 - [[#tab-bar][TAB BAR]]
 - [[#theme][THEME]]
+- [[#treemacs][TREEMACS]]
 - [[#which-key][WHICH-KEY]]
 - [[#undo-tree-in-evil][UNDO-TREE IN EVIL]]
 
@@ -221,9 +222,8 @@
     "t" '(:ignore t :wk "Toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t q" '(visual-line-mode :wk "Toggle truncated lines")
-    "t t" '(neotree-toggle :wk "Toggle neotree file viewer")
-    "t d" '(neotree-dir :wk "Open neotree in directory..")
-    "t n" '(neotree-find :wk "Open buffer directory in neotree")
+    "t t" '(treemacs :wk "Toggle treemacs")
+    "t d" '(treemacs-select-directory :wk "Open treemacs in dir..")
 )
 
 
@@ -266,8 +266,9 @@ This is an icon set that can be used with dashboard, dired, ibuffer and other Em
   :ensure t
   :if (display-graphic-p))
 
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+;; (use-package all-the-icons-dired
+;;   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
 #+end_src
 
 * BUFFER-MOVE
@@ -411,6 +412,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
     "This separates the intrepid from the casual, believe me"
     "انطيني بايب القدس"
     "خلني أشرحلك"
+    "والحمد لله رب العالمين"
   ))
   :config
   (dashboard-setup-startup-hook))
@@ -624,72 +626,51 @@ Setting up magit (git package in emacs). Seems to be working fine with evil mode
 #+end_src
 
 * NEOTREE 
-Setting up neotree for a project/file manager as a sidebar. 
+# Setting up neotree for a project/file manager as a sidebar. 
 
-#+BEGIN_SRC emacs-lisp
-(use-package neotree			
-  :config
-  (setq neo-smart-open nil
-        neo-show-hidden-files t
-        neo-window-width 35
-        neo-window-fixed-size nil
-        inhibit-compacting-font-caches t
-        projectile-switch-project-action 'neotree-projectile-action) 
-        ;; truncate long file names in neotree
-        (add-hook 'neo-after-create-hook
-           #'(lambda (_)
-               (with-current-buffer (get-buffer neo-buffer-name)
-                 (setq truncate-lines t)
-                 (setq word-wrap nil)
-                 (make-local-variable 'auto-hscroll-mode)
-                 (setq auto-hscroll-mode nil)))) (add-hook 'neotree-mode-hook
-              (lambda ()
-                (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-                (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
-                (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-                (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-                (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
-                (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
-                (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
-                (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
-                (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+# #+BEGIN_SRC emacs-lisp
+# (use-package neotree			
+#   :config
+#   (setq neo-smart-open nil
+#         neo-show-hidden-files t
+#         neo-window-width 35
+#         neo-window-fixed-size nil
+#         inhibit-compacting-font-caches t
+#         projectile-switch-project-action 'neotree-projectile-action) 
+#         ;; truncate long file names in neotree
+#         (add-hook 'neo-after-create-hook
+#            #'(lambda (_)
+#                (with-current-buffer (get-buffer neo-buffer-name)
+#                  (setq truncate-lines t)
+#                  (setq word-wrap nil)
+#                  (make-local-variable 'auto-hscroll-mode)
+#                  (setq auto-hscroll-mode nil)))) (add-hook 'neotree-mode-hook
+#               (lambda ()
+#                 (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+#                 (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+#                 (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+#                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+#                 (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+#                 (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+#                 (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+#                 (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+#                 (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
 
-         (add-hook 'neotree-mode-hook
-              (lambda ()
-                (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-                (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
-                (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-                (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-                (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
-                (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
-                (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
-                (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
-                (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
-)
+#          (add-hook 'neotree-mode-hook
+#               (lambda ()
+#                 (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+#                 (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+#                 (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+#                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+#                 (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+#                 (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+#                 (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+#                 (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+#                 (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+# )
 
-#+end_src
+# #+end_src
 
-* QUICK NAVIGATION (SCAN THROUGH DOCUMENT)
-Creating a shorter for moving x amount of lines up & down for a faster way to scan through buffer.
-
-#+begin_src emacs-lisp
-;Defining scan line size
-(defcustom num-lines 30 "Number of lines to use for custom quick navigation scanning"
-  :type 'integer
-  :group 'my-custom-group)
-
-;Defining function
-(defun scan-up()
-  (interactive)
-  (previous-line num-lines))
-(defun scan-down()
-  (interactive)
-  (next-line num-lines))
-
-;Adding keybindings
-(global-set-key (kbd "M-k") 'scan-up)
-(global-set-key (kbd "M-j") 'scan-down)
-#+end_src
 
 
 * ORG MODE
@@ -805,6 +786,28 @@ Enabling automatic latex preview in Org Mode (Automatically toggle Org mode LaTe
   (projectile-mode 1))
 #+end_src
 
+
+* QUICK NAVIGATION (SCAN THROUGH DOCUMENT)
+Creating a shorter for moving x amount of lines up & down for a faster way to scan through buffer.
+
+#+begin_src emacs-lisp
+;Defining scan line size
+(defcustom num-lines 30 "Number of lines to use for custom quick navigation scanning"
+  :type 'integer
+  :group 'my-custom-group)
+
+;Defining function
+(defun scan-up()
+  (interactive)
+  (previous-line num-lines))
+(defun scan-down()
+  (interactive)
+  (next-line num-lines))
+
+;Adding keybindings
+(global-set-key (kbd "M-k") 'scan-up)
+(global-set-key (kbd "M-j") 'scan-down)
+#+end_src
 
 * RAINBOW MODE
 Display the actual color as a background for any hex color value (ex. #ffffff, #928345).  The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.  
@@ -976,6 +979,131 @@ Currently using srcery theme. timu-macos is a theme I found on https://emacsthem
 
 ;(set-frame-parameter (selected-frame) 'alpha '(85 . 50)) ;for current frame
 ;(add-to-list 'default-frame-alist '(alpha . (85 . 50))) ;for all frames (default value)
+
+#+end_src
+
+* TREEMACS
+Setting up treemacs (a better alternative to neotree)
+
+#+begin_src emacs-lisp
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :config
+  (progn
+    (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay        0.5
+          treemacs-directory-name-transformer      #'identity
+          treemacs-display-in-side-window          t
+          treemacs-eldoc-display                   'simple
+          treemacs-file-event-delay                2000
+          treemacs-file-extension-regex            treemacs-last-period-regex-value
+          treemacs-file-follow-delay               0.2
+          treemacs-file-name-transformer           #'identity
+          treemacs-follow-after-init               t
+          treemacs-expand-after-init               t
+          treemacs-find-workspace-method           'find-for-file-or-pick-first
+          treemacs-git-command-pipe                ""
+          treemacs-goto-tag-strategy               'refetch-index
+          treemacs-header-scroll-indicators        '(nil . "^^^^^^")
+          treemacs-hide-dot-git-directory          t
+          treemacs-indentation                     2
+          treemacs-indentation-string              " "
+          treemacs-is-never-other-window           nil
+          treemacs-max-git-entries                 5000
+          treemacs-missing-project-action          'ask
+          treemacs-move-forward-on-expand          nil
+          treemacs-no-png-images                   nil
+          treemacs-no-delete-other-windows         t
+          treemacs-project-follow-cleanup          nil
+          treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                        'left
+          treemacs-read-string-input               'from-child-frame
+          treemacs-recenter-distance               0.1
+          treemacs-recenter-after-file-follow      nil
+          treemacs-recenter-after-tag-follow       nil
+          treemacs-recenter-after-project-jump     'always
+          treemacs-recenter-after-project-expand   'on-distance
+          treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
+          treemacs-project-follow-into-home        nil
+          treemacs-show-cursor                     nil
+          treemacs-show-hidden-files               t
+          treemacs-silent-filewatch                nil
+          treemacs-silent-refresh                  nil
+          treemacs-sorting                         'alphabetic-asc
+          treemacs-select-when-already-in-treemacs 'move-back
+          treemacs-space-between-root-nodes        t
+          treemacs-tag-follow-cleanup              t
+          treemacs-tag-follow-delay                1.5
+          treemacs-text-scale                      nil
+          treemacs-user-mode-line-format           nil
+          treemacs-user-header-line-format         nil
+          treemacs-wide-toggle-width               70
+          treemacs-width                           35
+          treemacs-width-increment                 1
+          treemacs-width-is-initially-locked       t
+          treemacs-workspace-switch-cleanup        nil)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode 'always)
+    (when treemacs-python-executable
+      (treemacs-git-commit-diff-mode t))
+
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+
+    (treemacs-hide-gitignored-files-mode nil))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-evil
+  :after (treemacs evil)
+  :ensure t
+  :config
+(evil-define-key 'treemacs treemacs-mode-map (kbd "w") #'treemacs-select-window)) 
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t)
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :ensure t)
+
+(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))
+
+(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+  :after (treemacs)
+  :ensure t
+  :config (treemacs-set-scope-type 'Tabs))
+
 
 #+end_src
 
