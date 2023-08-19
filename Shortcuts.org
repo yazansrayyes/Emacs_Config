@@ -8,6 +8,7 @@
 @@latex:\clearpage@@ 
 
 * Table of Contents :toc:
+- [[#buffers][Buffers]]
 - [[#code-blocks][Code Blocks]]
   - [[#editing-code-block-in-seperate-buffer][Editing Code Block in Seperate Buffer]]
   - [[#evaluating-code-blocksoutputting-results][Evaluating Code Blocks/Outputting Results]]
@@ -40,6 +41,10 @@
   - [[#almost-all-keybindings][(Almost) All Keybindings]]
 - [[#view-recently-used-commandskeys][View Recently Used Commands/Keys]]
 - [[#miscellaneous-notes][Miscellaneous Notes]]
+
+* Buffers
+(SPC-s) write buffer (save file)——same as ":w"
+
 
 * Code Blocks
 ** Editing Code Block in Seperate Buffer

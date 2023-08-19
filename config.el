@@ -156,12 +156,14 @@
     "m d t" '(org-time-stamp :wk "Org time stamp"))
 
   (AY/leader-keys
+    "s" '(evil-write :wk "Write buffer"))
+
+  (AY/leader-keys
     "t" '(:ignore t :wk "Toggle")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t q" '(visual-line-mode :wk "Toggle truncated lines")
     "t t" '(treemacs :wk "Toggle treemacs")
-    "t d" '(treemacs-select-directory :wk "Open treemacs in dir..")
-)
+    "t d" '(treemacs-select-directory :wk "Open treemacs in dir.."))
 
 
   (AY/leader-keys
@@ -517,6 +519,8 @@ one, an error is signaled."
 (setq-default org-export-with-broken-links t)
 (setq-default org-export-with-toc t)
 (setq-default org-confirm-babel-evaluate nil)
+
+(setq org-default-notes-file "/Users/yazanalrayyes/Desktop/Work/Notes.org")
 
 (use-package projectile
   :config
