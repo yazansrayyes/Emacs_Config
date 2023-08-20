@@ -114,7 +114,7 @@
     "e h" '(counsel-esh-history :which-key "Eshell history")
     "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
     "e r" '(eval-region :wk "Evaluate elisp in region")
-    "e s" '(eshell :which-key "Eshell"))
+    "e s" '(shell :which-key "Shell"))
 
   (AY/leader-keys
     "SPC" '(counsel-M-x :wk "Counsel M-x")
@@ -412,9 +412,7 @@ one, an error is signaled."
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-;;setting default window size on open up
-;;(add-to-list 'default-frame-alist '(width . 214))   ; Set the width (in characters)
-;;(add-to-list 'default-frame-alist '(height . 59))   ; Set the height (in lines)
+(setq-default mode-line-modes nil)
 
 (global-display-line-numbers-mode 1)
 (global-visual-line-mode t)

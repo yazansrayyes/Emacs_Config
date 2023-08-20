@@ -251,6 +251,8 @@ If you're at the first heading & want to move down to the next heading of the sa
 (SPC-m t) to cycle through TO-DO labels. This keybinding is the same as (C-c C-t).
 
 * Shell 
+For now, it seems that ansi-term is the best option for using a terminal within emacs. Shell works as well, but is a bit buggy because it's not interactive. Other options exist, but ansi-term should do fine for now.
+
 ** Clearing Shell Buffer  
 C-c M-o clears the shell buffer (regular shell)
 

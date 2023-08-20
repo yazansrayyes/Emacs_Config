@@ -20,7 +20,7 @@
   - [[#zooming-inout][Zooming In/Out]]
 - [[#jupyter-notebook-ipynb][JUPYTER NOTEBOOK (IPYNB)]]
 - [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
-  - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
+  - [[#disable-toolbars-scrollbars--mode-line-modes][Disable Toolbars, Scrollbars, & Mode line modes]]
   - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
   - [[#relative-line-numbering][Relative Line Numbering]]
   - [[#yank-pulse][Yank Pulse]]
@@ -179,7 +179,7 @@
     "e h" '(counsel-esh-history :which-key "Eshell history")
     "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
     "e r" '(eval-region :wk "Evaluate elisp in region")
-    "e s" '(eshell :which-key "Eshell"))
+    "e s" '(shell :which-key "Shell"))
 
   (AY/leader-keys
     "SPC" '(counsel-M-x :wk "Counsel M-x")
@@ -541,13 +541,12 @@ Setting up a way to edit jupyter notebook files in emacs. However, you should pr
 * GRAPHICAL USER INTERFACE TWEAKS
 Let's make GNU Emacs look a little better.
 
-** Disable Menubar, Toolbars and Scrollbars
+** Disable Toolbars, Scrollbars, & Mode line modes
 #+begin_src emacs-lisp
-   (tool-bar-mode -1)
-   (scroll-bar-mode -1)
-   ;;setting default window size on open up
-   ;;(add-to-list 'default-frame-alist '(width . 214))   ; Set the width (in characters)
-   ;;(add-to-list 'default-frame-alist '(height . 59))   ; Set the height (in lines)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq-default mode-line-modes nil)
+
 #+end_src
 
 ** Display Line Numbers and Truncated Lines
@@ -560,6 +559,7 @@ Let's make GNU Emacs look a little better.
 #+begin_src emacs-lisp
   (setq display-line-numbers-type 'relative)
 #+end_src
+
 
 ** Yank Pulse
 For momentarily pulsing yanked text
