@@ -570,6 +570,18 @@ one, an error is signaled."
       eshell-destroy-buffer-when-process-dies t
       eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 
+(defun open-ansi-term-in-split ()
+  "Open an ANSI term in a split window."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (ansi-term "/bin/zsh") ; You can change "/bin/zsh" to another shell if you like
+  (let ((win-width (window-width)))
+    (if (>= win-width 20)
+        (shrink-window 10))))
+
+(global-set-key (kbd "M-e") 'open-ansi-term-in-split)
+
 (use-package sudo-edit
   :config
     (AY/leader-keys

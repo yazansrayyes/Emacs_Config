@@ -37,6 +37,7 @@
   - [[#to-do][TO-DO]]
 - [[#shell][Shell]]
   - [[#clearing-shell-buffer][Clearing Shell Buffer]]
+  - [[#opening-termianl-emulator][Opening Termianl Emulator]]
 - [[#treemacs][Treemacs]]
   - [[#almost-all-keybindings][(Almost) All Keybindings]]
 - [[#view-recently-used-commandskeys][View Recently Used Commands/Keys]]
@@ -44,6 +45,7 @@
 
 * Buffers
 (SPC-s) write buffer (save file)——same as ":w"
+(M-r) is set as (C-c C-c) which does multiple things: run codeblocks, write git commit after writing message, toggle list items [x], etc..
 
 
 * Code Blocks
@@ -251,6 +253,9 @@ If you're at the first heading & want to move down to the next heading of the sa
 * Shell 
 ** Clearing Shell Buffer  
 C-c M-o clears the shell buffer (regular shell)
+
+** Opening Termianl Emulator 
+(M-e) is bound to open ansi-term in a split window (it also resizes it). Ansi term opens in the directory of the current buffer.   
 
 * Treemacs
 Treemacs seems to be much better than neotree for viewing files. Here are a few keybindings (most of which are set by default)——taken from github.

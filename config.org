@@ -44,6 +44,7 @@
 - [[#reload-emacs][RELOAD EMACS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#eshell][Eshell]]
+  - [[#ansi-term-shortcut][Ansi Term Shortcut]]
 - [[#sudo-edit][SUDO EDIT]]
 - [[#tab-bar][TAB BAR]]
 - [[#theme][THEME]]
@@ -900,7 +901,24 @@ Eshell is an Emacs 'shell' that is written in Elisp.
 #                   (window-height . 0.3))))
 # #+end_src
 
+** Ansi Term Shortcut
+Creating a keybinding to allow opening ansi terminal emulator as a split window in the directory of the current buffer.
 
+#+begin_src emacs-lisp
+(defun open-ansi-term-in-split ()
+  "Open an ANSI term in a split window."
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (ansi-term "/bin/zsh") ; You can change "/bin/zsh" to another shell if you like
+  (let ((win-width (window-width)))
+    (if (>= win-width 20)
+        (shrink-window 10))))
+
+(global-set-key (kbd "M-e") 'open-ansi-term-in-split)
+
+
+#+end_src
 
 * SUDO EDIT
 [[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
