@@ -153,6 +153,7 @@
 
   (AY/leader-keys
     "m d" '(:ignore t :wk "Date/deadline")
+    "m d s" '(org-schedule :wk "Org schedule")
     "m d t" '(org-time-stamp :wk "Org time stamp"))
 
   (AY/leader-keys
@@ -191,16 +192,15 @@
     "> e" '(org-export-dispatch :wk "Export Org File")
    )
 
-
-
 )
 
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
 
-;; (use-package all-the-icons-dired
-;;   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t)))
+  :config (setq all-the-icons-dired-monochrome nil))
 
 (require 'windmove)
 
@@ -712,10 +712,10 @@ one, an error is signaled."
           treemacs-width-is-initially-locked       t
           treemacs-workspace-switch-cleanup        nil)
 
+
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
     ;;(treemacs-resize-icons 44)
-
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode 'always)
@@ -750,9 +750,9 @@ one, an error is signaled."
   :after (treemacs projectile)
   :ensure t)
 
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
+;; (use-package treemacs-icons-dired
+;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
+;;   :ensure t)
 
 (use-package treemacs-magit
   :after (treemacs magit)

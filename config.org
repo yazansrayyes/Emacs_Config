@@ -218,6 +218,7 @@
 
   (AY/leader-keys
     "m d" '(:ignore t :wk "Date/deadline")
+    "m d s" '(org-schedule :wk "Org schedule")
     "m d t" '(org-time-stamp :wk "Org time stamp"))
 
   (AY/leader-keys
@@ -256,8 +257,6 @@
     "> e" '(org-export-dispatch :wk "Export Org File")
    )
 
-
-
 )
 
 #+end_src
@@ -270,10 +269,12 @@ This is an icon set that can be used with dashboard, dired, ibuffer and other Em
   :ensure t
   :if (display-graphic-p))
 
-;; (use-package all-the-icons-dired
-;;   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t)))
+  :config (setq all-the-icons-dired-monochrome nil))
 
 #+end_src
+
 
 * BUFFER-MOVE
 Creating some functions to allow us to easily move windows (splits) around.  The following block of code was taken from buffer-move.el found on the EmacsWiki:
@@ -350,7 +351,6 @@ one, an error is signaled."
       (select-window other-win))))
 #+end_src
 
-
 * COMPANY
 [[https://company-mode.github.io/][Company]] is a text completion framework for Emacs. The name stands for "complete anything".  Completion will start automatically after you type a few letters. Use M-n and M-p to select, <return> to complete or <tab> to complete the common part.
 
@@ -374,7 +374,6 @@ one, an error is signaled."
 (add-hook 'org-mode-hook #'company-mode)
 
 #+end_src
-
 
 
 
@@ -459,7 +458,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   :init (global-flycheck-mode))
 
 #+end_src
-
 
 * FONTS
 Defining the various fonts that Emacs will use.
@@ -676,7 +674,6 @@ Setting up magit (git package in emacs). Seems to be working fine with evil mode
 # #+end_src
 
 
-
 * ORG MODE
 ** Enabling Table of Contents
 #+begin_src emacs-lisp
@@ -796,7 +793,6 @@ Setting up location to save notes taken using org-capture.
   :config
   (projectile-mode 1))
 #+end_src
-
 
 * QUICK NAVIGATION (SCAN THROUGH DOCUMENT)
 Creating a shorter for moving x amount of lines up & down for a faster way to scan through buffer.
@@ -954,7 +950,6 @@ I'm also using some setting some keybindings to be the same as chrome's so you k
 
 #+end_src
 
-
 * THEME
 Currently using srcery theme. timu-macos is a theme I found on https://emacsthemes.com/, but it seems to mess up emacs graphics.
 #+begin_src emacs-lisp
@@ -1076,10 +1071,10 @@ Setting up treemacs (a better alternative to neotree)
           treemacs-width-is-initially-locked       t
           treemacs-workspace-switch-cleanup        nil)
 
+
     ;; The default width and height of the icons is 22 pixels. If you are
     ;; using a Hi-DPI display, uncomment this to double the icon size.
     ;;(treemacs-resize-icons 44)
-
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode 'always)
@@ -1114,9 +1109,9 @@ Setting up treemacs (a better alternative to neotree)
   :after (treemacs projectile)
   :ensure t)
 
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
+;; (use-package treemacs-icons-dired
+;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
+;;   :ensure t)
 
 (use-package treemacs-magit
   :after (treemacs magit)
@@ -1131,7 +1126,6 @@ Setting up treemacs (a better alternative to neotree)
   :after (treemacs)
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
-
 
 #+end_src
 
@@ -1171,4 +1165,3 @@ Sets up undo-redo functionality in evil using undo-tree ("u" for undo & "C-r" fo
 
 (setq evil-undo-system 'undo-tree)
 #+end_src
-

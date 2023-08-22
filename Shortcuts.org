@@ -45,7 +45,7 @@
 
 * Buffers
 (SPC-s) write buffer (save file)——same as ":w"
-(M-r) is set as (C-c C-c) which does multiple things: run codeblocks, write git commit after writing message, toggle list items [x], etc..
+(M-r) is set as (C-c C-c) which does multiple things in different modes: run codeblocks in jupyter notebooks, toggle list items [x], etc..
 
 
 * Code Blocks

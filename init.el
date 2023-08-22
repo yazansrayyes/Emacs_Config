@@ -12,7 +12,8 @@
    '("قول صدق، في لوب؟" "Two Words: Org Mode" "I’m out of my mind" "There we go" "اه لا اصحك" "Self-defeating Loops" "Emacs is a fully hackable system" "هو السيريتونن" "هذا ولد طاير"))
  '(ein:jupyter-server-use-subcommand "server")
  '(org-agenda-files '("~/Desktop/Work/Agenda.org"))
- '(package-selected-packages '(ein mpv dracula-theme undo-tree markdown-mode))
+ '(package-selected-packages
+   '(treemacs-all-the-icons ein mpv dracula-theme undo-tree markdown-mode))
  '(warning-suppress-types
    '((emacs)
      ((package reinitialization))
