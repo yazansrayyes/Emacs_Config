@@ -202,6 +202,8 @@
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t)))
   :config (setq all-the-icons-dired-monochrome nil))
 
+(setq backup-directory-alist '((".*" . "~/.Trash")))
+
 (require 'windmove)
 
 ;;;###autoload
@@ -425,6 +427,9 @@ one, an error is signaled."
 
 (advice-add 'evil-yank :around 'alrayyes/evil-yank-advice)
 
+(use-package simple-modeline
+  :hook (after-init . simple-modeline-mode))
+
 (use-package counsel
   :after ivy
   :config (counsel-mode))
@@ -463,7 +468,7 @@ one, an error is signaled."
 (use-package magit
   :ensure t)
 
-;;need to use evil-collection for evil mode to work properly with magit status buffer
+;;need to use evil-collection for evil mode to work properly with magit status buffer (installed in another section)
 
 (use-package toc-org
     :commands toc-org-enable
@@ -749,10 +754,6 @@ one, an error is signaled."
 (use-package treemacs-projectile
   :after (treemacs projectile)
   :ensure t)
-
-;; (use-package treemacs-icons-dired
-;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
-;;   :ensure t)
 
 (use-package treemacs-magit
   :after (treemacs magit)

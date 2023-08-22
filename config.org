@@ -10,6 +10,7 @@
   - [[#load-evil-mode][Load Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
 - [[#all-the-icons][ALL THE ICONS]]
+- [[#backup][BACKUP]]
 - [[#buffer-move][BUFFER-MOVE]]
 - [[#company][COMPANY]]
 - [[#dashboard][DASHBOARD]]
@@ -24,6 +25,7 @@
   - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
   - [[#relative-line-numbering][Relative Line Numbering]]
   - [[#yank-pulse][Yank Pulse]]
+  - [[#mode-line][Mode Line]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#magit][MAGIT]]
@@ -275,6 +277,12 @@ This is an icon set that can be used with dashboard, dired, ibuffer and other Em
 
 #+end_src
 
+* BACKUP 
+By default, Emacs creates automatic backups of files in their original directories, such "file.el" and the backup "file.el~".  This leads to a lot of clutter, so let's tell Emacs to put all backups that it creates in the =TRASH= directory.
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist '((".*" . "~/.Trash")))
+#+end_src
 
 * BUFFER-MOVE
 Creating some functions to allow us to easily move windows (splits) around.  The following block of code was taken from buffer-move.el found on the EmacsWiki:
@@ -569,6 +577,15 @@ For momentarily pulsing yanked text
   (advice-add 'evil-yank :around 'alrayyes/evil-yank-advice)
 #+end_src
 
+** Mode Line
+Setting up package for a nicer-looking mode line.
+#+begin_src emacs-lisp
+(use-package simple-modeline
+  :hook (after-init . simple-modeline-mode))
+
+#+end_src
+
+
 * IVY (COUNSEL)
 + Ivy, a generic completion mechanism for Emacs.
 + Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
@@ -624,7 +641,7 @@ Setting up magit (git package in emacs). Seems to be working fine with evil mode
 (use-package magit
   :ensure t)
 
-;;need to use evil-collection for evil mode to work properly with magit status buffer
+;;need to use evil-collection for evil mode to work properly with magit status buffer (installed in another section)
 #+end_src
 
 * NEOTREE 
@@ -1009,7 +1026,6 @@ Currently using srcery theme. timu-macos is a theme I found on https://emacsthem
 Setting up treemacs (a better alternative to neotree)
 
 #+begin_src emacs-lisp
-
 (use-package treemacs
   :ensure t
   :defer t
@@ -1108,10 +1124,6 @@ Setting up treemacs (a better alternative to neotree)
 (use-package treemacs-projectile
   :after (treemacs projectile)
   :ensure t)
-
-;; (use-package treemacs-icons-dired
-;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
-;;   :ensure t)
 
 (use-package treemacs-magit
   :after (treemacs magit)
