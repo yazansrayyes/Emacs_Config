@@ -47,6 +47,8 @@
 (SPC-s) write buffer (save file)——same as ":w"
 (M-r) is set as (C-c C-c) which does multiple things in different modes: run codeblocks in jupyter notebooks, toggle list items [x], etc..
 
+If a buffer is not closing (responding to SPC leader key), it's probably because evil mode doesn't work in it. Use 'q' to quit instead.
+
 
 * Code Blocks
 ** Editing Code Block in Seperate Buffer
@@ -192,7 +194,7 @@ To use it:
 You need to have a Jupyter server running before using ein:notebooklist-open in ein (Emacs IPython Notebook). The ein:notebooklist-open function is used to open the list of available Jupyter notebooks from the server.
 
 ** Steps for Jupyter Server
-Start Jupyter Server: Before you can interact with Jupyter notebooks using ein, you need to start a Jupyter server. You can do this by opening a terminal or command prompt and running the command "jupyter notebook".
+Start Jupyter Server: Before you can interact with Jupyter notebooks using ein, you need to start a Jupyter server. You can do this by opening a terminal or command prompt and running the command "jupyter notebook". This will open a server in the directory that you choose.
 
 Open ein Notebook List: After the Jupyter server is up and running, you can open the ein notebook list by executing the command M-x ein:notebooklist-open. This command will display a list of notebooks available on the Jupyter server.
 
@@ -207,8 +209,10 @@ If you encounter any issues with ein not working as expected, make sure that you
 ** Notebook Shortcuts
 (M-b) adds cell below current. (M-a) adds cell aboves. [same type of the current cell]
 (M-t) toggles cell type [code<->mkdn]
-(M-r) run cell
+(M-r) execute cell
 (M-s) save notebook
+(M-e) execute all cells
+(dd) kill cell (deletes current cell).
 
 * Latex 
 ** Inserting Latex

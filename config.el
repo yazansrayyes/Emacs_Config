@@ -89,15 +89,24 @@
     :prefix "SPC" ;; set leader
     :global-prefix "M-SPC") ;; access leader in insert mode
 
-
   (AY/leader-keys
-    "b" '(:ignore t :wk "buffer")
+    "b" '(:ignore t :wk "Buffers/Bookmarks")
     "b b" '(switch-to-buffer :wk "Switch buffer")
+    "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
+    "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
+    "b d" '(bookmark-delete :wk "Delete bookmark")
     "b i" '(ibuffer :wk "Ibuffer")
     "b k" '(kill-this-buffer :wk "Kill this buffer")
+    "b K" '(kill-some-buffers :wk "Kill multiple buffers")
+    "b l" '(list-bookmarks :wk "List bookmarks")
+    "b m" '(bookmark-set :wk "Set bookmark")
     "b n" '(next-buffer :wk "Next buffer")
     "b p" '(previous-buffer :wk "Previous buffer")
-    "b r" '(revert-buffer :wk "Reload buffer"))
+    "b r" '(revert-buffer :wk "Reload buffer")
+    "b R" '(rename-buffer :wk "Rename buffer")
+    "b s" '(basic-save-buffer :wk "Save buffer")
+    "b S" '(save-some-buffers :wk "Save multiple buffers")
+    "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
 
   (AY/leader-keys
     "d" '(:ignore t :wk "Display/Dired")
@@ -131,12 +140,49 @@
     "g s" '(magit-stage-buffer-file :wk "Magit stage buffer file")
     "g g" '(magit-status :wk "Magit status"))
 
-
   (AY/leader-keys
     "h" '(:ignore t :wk "Help")
+    "h a" '(counsel-apropos :wk "Apropos")
+    "h b" '(describe-bindings :wk "Describe bindings")
+    "h c" '(describe-char :wk "Describe character under cursor")
+    "h d" '(:ignore t :wk "Emacs documentation")
+    "h d a" '(about-emacs :wk "About Emacs")
+    "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
+    "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
+    "h d m" '(info-emacs-manual :wk "The Emacs manual")
+    "h d n" '(view-emacs-news :wk "View Emacs news")
+    "h d o" '(describe-distribution :wk "How to obtain Emacs")
+    "h d p" '(view-emacs-problems :wk "View Emacs problems")
+    "h d t" '(view-emacs-todo :wk "View Emacs todo")
+    "h d w" '(describe-no-warranty :wk "Describe no warranty")
+    "h e" '(view-echo-area-messages :wk "View echo area messages")
     "h f" '(describe-function :wk "Describe function")
+    "h F" '(describe-face :wk "Describe face")
+    "h g" '(describe-gnu-project :wk "Describe GNU Project")
+    "h i" '(info :wk "Info")
+    "h I" '(describe-input-method :wk "Describe input method")
+    "h k" '(describe-key :wk "Describe key")
+    "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
+    "h L" '(describe-language-environment :wk "Describe language environment")
+    "h m" '(describe-mode :wk "Describe mode")
+    "h r" '(:ignore t :wk "Reload")
+    "h r r" '((lambda () (interactive)
+                (load-file "~/.config/emacs/init.el")
+                (ignore (elpaca-process-queues)))
+              :wk "Reload emacs config")
+    ;"h r r" '(reload-init-file :wk "Reload emacs config")
+    "h t" '(load-theme :wk "Load theme")
     "h v" '(describe-variable :wk "Describe variable")
-    "h r r" '(reload-init-file :wk "Reload emacs config"))
+    "h w" '(where-is :wk "Prints keybinding for command if set")
+    "h x" '(describe-command :wk "Display full documentation for command"))
+
+  (AY/leader-keys
+    "j" '(:ignore t :wk "Jupyter Notebook")
+    "j s" '(ein:jupyter-server-start :wk "Jypter server start")
+    "j p" '(ein:jupyter-server-stop :wk "Jupyter server stop")
+    "j o" '(ein:notebooklist-open :wk "Notebook open")
+
+)
 
   (AY/leader-keys
     "m" '(:ignore t :wk "Org")
@@ -155,6 +201,17 @@
     "m d" '(:ignore t :wk "Date/deadline")
     "m d s" '(org-schedule :wk "Org schedule")
     "m d t" '(org-time-stamp :wk "Org time stamp"))
+
+  (AY/leader-keys
+    "r" '(:ignore t :wk "Registers")
+    "r a" '(append-to-register :wk "Append to register")
+    "r c" '(copy-to-register :wk "Copy test to register")
+    "r i" '(insert-register :wk "Insert register")
+    "r j" '(jump-to-register :wk "Jump to register")
+    "r l" '(list-registers :wk "List registers")  
+    "r p" '(point-to-register :wk "Copy position to register")
+    "r r" '(copy-rectangle-to-register :wk "Copy rectangle to register"))
+
 
   (AY/leader-keys
     "s" '(evil-write :wk "Write buffer"))
@@ -304,8 +361,7 @@ one, an error is signaled."
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
                           (bookmarks . 3)
-                          (projects . 3)
-                          (registers . 3)))
+                          (projects . 3)))
 ;;  (dashboard-modify-heading-icons '((recents . "file-text")
                          ;;     (bookmarks . "book")))
   (setq dashboard-banner-logo-title  "Emacs is a fully hackable system")
@@ -326,6 +382,9 @@ one, an error is signaled."
     "انطيني بايب القدس"
     "خلني أشرحلك"
     "والحمد لله رب العالمين"
+    "أعط كل ذي حق حقه"
+    "ما أملك نفسي وما أدري ما هي"
+    "توكَّل على الحَيِّ الذي لا يموت"
   ))
   :config
   (dashboard-setup-startup-hook))
@@ -394,7 +453,7 @@ one, an error is signaled."
   :config
   (require 'jupyter))
 
-;;Setting up a few keybindings to use in ein (NOTE: these keybindings only work when in ein mode)
+;;Setting up a few keybindings to use in jupyter notebook (ein) [NOTE: these keybindings only work when in ein mode]
 (with-eval-after-load 'evil
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-t") 'ein:worksheet-change-cell-type) ;toggles type of block (code<->mkdn)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-b") 'ein:worksheet-insert-cell-below)
@@ -402,7 +461,7 @@ one, an error is signaled."
   (evil-define-key '(normal)  ein:notebook-mode-map (kbd "dd") 'ein:worksheet-kill-cell)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-s") 'ein:notebook-save-notebook-command-km)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-r") 'ein:worksheet-execute-cell)
-  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-a") 'ein:worksheet-execute-all-cells)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-e") 'ein:worksheet-execute-all-cells)
 )
 
 ;;Toggling line numbers to be always on while using notebook (.ipynb file)——for some reason they keep turning off
@@ -426,9 +485,6 @@ one, an error is signaled."
   (apply orig-fn beg end args))
 
 (advice-add 'evil-yank :around 'alrayyes/evil-yank-advice)
-
-(use-package simple-modeline
-  :hook (after-init . simple-modeline-mode))
 
 (use-package counsel
   :after ivy
@@ -526,8 +582,10 @@ one, an error is signaled."
 (setq org-default-notes-file "/Users/yazanalrayyes/Desktop/Work/Notes.org")
 
 (use-package projectile
+  :ensure t
   :config
-  (projectile-mode 1))
+  (projectile-mode 1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map))
 
 ;Defining scan line size
 (defcustom num-lines 30 "Number of lines to use for custom quick navigation scanning"
@@ -549,11 +607,6 @@ one, an error is signaled."
 (use-package rainbow-mode
   :hook org-mode prog-mode
   :diminish)
-
-(defun reload-init-file ()
-  (interactive)
-  (load-file user-init-file)
-  (load-file user-init-file))
 
 (use-package eshell-syntax-highlighting
   :after esh-mode
