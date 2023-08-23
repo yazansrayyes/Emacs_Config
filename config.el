@@ -214,7 +214,7 @@
 
 
   (AY/leader-keys
-    "s" '(evil-write :wk "Write buffer"))
+    "s" '(evil-update :wk "Update (save) buffer"))
 
   (AY/leader-keys
     "t" '(:ignore t :wk "Toggle")
@@ -584,8 +584,7 @@ one, an error is signaled."
 (use-package projectile
   :ensure t
   :config
-  (projectile-mode 1)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map))
+  (projectile-mode 1))
 
 ;Defining scan line size
 (defcustom num-lines 30 "Number of lines to use for custom quick navigation scanning"

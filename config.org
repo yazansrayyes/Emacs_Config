@@ -139,7 +139,6 @@
  (setq ring-bell-function #'ignore)
 #+end_src
 
-
 ** General Keybindings
 #+begin_src emacs-lisp
 (use-package general
@@ -278,7 +277,7 @@
 
 
   (AY/leader-keys
-    "s" '(evil-write :wk "Write buffer"))
+    "s" '(evil-update :wk "Update (save) buffer"))
 
   (AY/leader-keys
     "t" '(:ignore t :wk "Toggle")
@@ -436,8 +435,6 @@ one, an error is signaled."
 (add-hook 'org-mode-hook #'company-mode)
 
 #+end_src
-
-
 
 * DASHBOARD
 Emacs Dashboard is an extensible startup screen showing you recent files, bookmarks, agenda items and an Emacs banner.
@@ -622,7 +619,6 @@ Let's make GNU Emacs look a little better.
   (setq display-line-numbers-type 'relative)
 #+end_src
 
-
 ** Yank Pulse
 For momentarily pulsing yanked text
 #+begin_src emacs-lisp
@@ -632,7 +628,6 @@ For momentarily pulsing yanked text
 
   (advice-add 'evil-yank :around 'alrayyes/evil-yank-advice)
 #+end_src
-
 
 * IVY (COUNSEL)
 + Ivy, a generic completion mechanism for Emacs.
@@ -1201,8 +1196,6 @@ Setting up treemacs (a better alternative to neotree)
     which-key-allow-imprecise-window-fit nil
     which-key-separator " → " ))
 #+end_src
-
-
 
 * UNDO-TREE IN EVIL
 Sets up undo-redo functionality in evil using undo-tree ("u" for undo & "C-r" for redo). You can open the "undo-tree" visualization buffer using (C-x u). 
