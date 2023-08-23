@@ -28,6 +28,7 @@
 - [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#language-support][LANGUAGE SUPPORT]]
 - [[#magit][MAGIT]]
+- [[#markdown-mode][MARKDOWN MODE]]
 - [[#org-mode][ORG MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
@@ -602,9 +603,13 @@ Let's make GNU Emacs look a little better.
 
 ** Disable Toolbars, Scrollbars, & Mode line modes
 #+begin_src emacs-lisp
+;;disabling tool & scroll bars
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(setq-default mode-line-modes nil)
+
+;;setting mode line to only show major mode
+(setq-default mode-line-modes
+              (list (propertize "%m" 'face 'mode-line-mode)))
 
 #+end_src
 
@@ -733,6 +738,15 @@ Setting up magit (git package in emacs). Seems to be working fine with evil mode
 # )
 
 # #+end_src
+
+* MARKDOWN MODE
+Setting up markdown mode for viewing and editing markdown (md) files. 
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+#+end_src
 
 * ORG MODE
 ** Enabling Table of Contents

@@ -471,9 +471,13 @@ one, an error is signaled."
 (add-hook 'ein:notebook-mode-hook 'my-ein-setup)
 (setq ein:worksheet-enable-undo t)
 
+;;disabling tool & scroll bars
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(setq-default mode-line-modes nil)
+
+;;setting mode line to only show major mode
+(setq-default mode-line-modes
+              (list (propertize "%m" 'face 'mode-line-mode)))
 
 (global-display-line-numbers-mode 1)
 (global-visual-line-mode t)
@@ -525,6 +529,11 @@ one, an error is signaled."
   :ensure t)
 
 ;;need to use evil-collection for evil mode to work properly with magit status buffer (installed in another section)
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 
 (use-package toc-org
     :commands toc-org-enable
