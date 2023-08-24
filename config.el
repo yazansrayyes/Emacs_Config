@@ -458,10 +458,10 @@ one, an error is signaled."
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-t") 'ein:worksheet-change-cell-type) ;toggles type of block (code<->mkdn)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-b") 'ein:worksheet-insert-cell-below)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-a") 'ein:worksheet-insert-cell-above)
-  (evil-define-key '(normal)  ein:notebook-mode-map (kbd "dd") 'ein:worksheet-kill-cell)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-d") 'ein:worksheet-kill-cell)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-s") 'ein:notebook-save-notebook-command-km)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-r") 'ein:worksheet-execute-cell)
-  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-e") 'ein:worksheet-execute-all-cells)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-c") 'ein:worksheet-execute-all-cells)
 )
 
 ;;Toggling line numbers to be always on while using notebook (.ipynb file)——for some reason they keep turning off
