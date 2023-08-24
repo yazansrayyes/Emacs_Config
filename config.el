@@ -348,13 +348,6 @@ one, an error is signaled."
 
 (add-hook 'org-mode-hook #'company-mode)
 
-
-;; Install and configure company-Jedi for python autocompletion
-(use-package company-jedi
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-jedi))
-
 (use-package dashboard
   :ensure t 
   :init
@@ -467,7 +460,7 @@ one, an error is signaled."
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-a") 'ein:worksheet-insert-cell-above)
   (evil-define-key '(normal)  ein:notebook-mode-map (kbd "dd") 'ein:worksheet-kill-cell)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-s") 'ein:notebook-save-notebook-command-km)
-  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-r") 'ein:worksheet-execute-cell-and-goto-next-km)
+  (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-r") 'ein:worksheet-execute-cell)
   (evil-define-key '(normal insert visual) ein:notebook-mode-map (kbd "M-e") 'ein:worksheet-execute-all-cells)
 )
 
@@ -476,7 +469,6 @@ one, an error is signaled."
   "My setup for ein:notebook-mode."
   (display-line-numbers-mode 1))
 (add-hook 'ein:notebook-mode-hook 'my-ein-setup)
-
 (setq ein:worksheet-enable-undo t)
 
 ;;disabling tool & scroll bars

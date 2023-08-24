@@ -13,7 +13,7 @@
  '(ein:jupyter-server-use-subcommand "server")
  '(org-agenda-files '("~/Desktop/Work/Agenda.org"))
  '(package-selected-packages
-   '(company-jedi treemacs-all-the-icons ein mpv dracula-theme undo-tree markdown-mode))
+   '(treemacs-all-the-icons ein mpv dracula-theme undo-tree markdown-mode))
  '(warning-suppress-types
    '((emacs)
      ((package reinitialization))
