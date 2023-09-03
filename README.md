@@ -1,2 +1,1 @@
-# Alrayyes Emacs Configuration Files
-Emacs config & shortcuts files
+DEPRECATED. USE OTHER REPO FOR CONFIGURATION.
