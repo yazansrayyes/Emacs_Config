@@ -1,1 +1,3 @@
-DEPRECATED. USE OTHER REPO FOR CONFIGURATION.
+# Emacs Configuration
+
+My personal GNU Emacs configuration.
